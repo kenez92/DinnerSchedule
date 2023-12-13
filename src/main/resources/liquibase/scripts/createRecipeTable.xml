@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="00000000000001" author="kenez">
+        <createTable tableName="recipe">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="ingredients" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="preparation" type="varchar(2000)"/>
+            <column name="portions" type="smallint"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="00000000000002" author="kenez">
+        <createSequence sequenceName="recipe_seq"
+                        cacheSize="50"
+                        incrementBy="50"
+                        startValue="1"/>
+    </changeSet>
+    <changeSet id="00000000000003" author="kenez">
+        <createIndex tableName="recipe" indexName="recipe_name">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
