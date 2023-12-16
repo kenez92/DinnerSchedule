@@ -6,8 +6,7 @@ import jakarta.persistence.*;
 @Entity
 public class Recipe {
     @Id
-    @GeneratedValue(generator = "recipe_seq")
-    @SequenceGenerator(name = "recipe_seq", sequenceName = "recipe_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private Integer portions;

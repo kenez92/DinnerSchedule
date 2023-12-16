@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/style/css/style.css}"/>
+    <title>Dodaj przepis</title>
+</head>
+<body class="bg">
+<form class="center-element" action="/api/recipe" method="post" th:object="${recipeDto}">
+    <p>Nazwa</p>
+    <input id="name" required type="text" name="name">
+    <p>Ilość porcji</p>
+    <input id="portions" required type="number" name="portions">
+    <p>Przygotowanie</p>
+    <input style="width:35%; height:100px" id="preparation" required type="text" name="preparation">
+    <fieldset>
+        <table>
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Ilość</th>
+                <th>Jednostka</th>
+            </tr>
+            </thead>
+            <tbody id="ingredients">
+            <tr>
+                <td><input type="text" name="ingredients[0].name"/></td>
+                <td><input type="number" name="ingredients[0].amount"/></td>
+                <td><input type="text" name="ingredients[0].unit"/></td>
+            </tbody>
+        </table>
+    </fieldset>
+    <input type="submit" id="submitButton" th:value="Zapisz">
+</form>
+<button id="addRowButton" onclick="addIngredient()">Dodaj składnik</button>
+
+
+<script>
+
+    function addIngredient() {
+        let body = document.getElementById("ingredients");
+        let rowNumber = body.rows.length;
+        console.log(rowNumber);
+        let newRow = body.insertRow(-1);
+
+        let nameCol = newRow.insertCell(-1);
+        let nameInput = document.createElement("input")
+        nameInput.name = "ingredients[" + rowNumber + "].name"
+        nameInput.type = "text";
+        nameInput.value = "name"
+        nameCol.appendChild(nameInput);
+
+        let amountCol = newRow.insertCell(-1);
+        let amountInput = document.createElement("input")
+        amountInput.name = "ingredients[" + rowNumber + "].amount"
+        amountInput.type = "number";
+        amountCol.appendChild(amountInput);
+
+        let unitCol = newRow.insertCell(-1)
+        let unitInput = document.createElement("input")
+        unitInput.name = "ingredients[" + rowNumber + "].unit"
+        unitInput.type = "text";
+        unitCol.appendChild(unitInput)
+
+        newRow.appendChild(nameCol);
+        newRow.appendChild(amountCol);
+        newRow.appendChild(unitCol);
+    }
+</script>
+</body>
+</html>

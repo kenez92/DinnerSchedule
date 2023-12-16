@@ -19,10 +19,13 @@ public class DataSourceConfig {
     @Value("${database.password}")
     private String password;
 
+    @Value("${database.driver}")
+    private String databaseDriver;
+
     @Bean
     public DataSource getDataSource() {
         return DataSourceBuilder.create()
-                .driverClassName("org.postgresql.Driver")
+                .driverClassName(databaseDriver)
                 .url(url)
                 .username(user)
                 .password(password)

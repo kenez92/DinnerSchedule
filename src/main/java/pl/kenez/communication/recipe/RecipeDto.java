@@ -1,29 +1,15 @@
 package pl.kenez.communication.recipe;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class RecipeDto implements Serializable {
 
-    @NotNull
-    @Size(max = 128)
     private String name;
-    @NotNull
-    @Positive
     private Integer portions;
 
-    @NotNull
-    @Size(max = 2000)
     private String preparation;
 
-    @NotNull
-    @Size(max = 32)
     private List<IngredientDto> ingredients;
 
     public RecipeDto() {
