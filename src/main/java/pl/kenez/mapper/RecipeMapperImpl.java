@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+import static pl.kenez.utils.ReplacePolishCharactersUtils.replacePolishCharacters;
+
 @Component
 class RecipeMapperImpl implements RecipeMapper {
     private static final String INGREDIENT_DELIMITER = ",";
@@ -17,21 +19,21 @@ class RecipeMapperImpl implements RecipeMapper {
     @Override
     public Recipe mapToRecipe(final RecipeDto recipeDto) {
         return new Recipe()
-                .name(recipeDto.getName())
-                .preparation(recipeDto.getPreparation())
+                .name(replacePolishCharacters(recipeDto.getName()))
+                .preparation(replacePolishCharacters(recipeDto.getPreparation()))
                 .portions(recipeDto.getPortions())
                 .ingredients(mapToIngredients(recipeDto.getIngredients()));
     }
 
     private String mapToIngredients(final List<IngredientDto> ingredients) {
         return ingredients.stream()
-                .map(this::mapToIngredient)
-                .collect(Collectors.joining(INGREDIENTS_DELIMITER));
+                          .map(this::mapToIngredient)
+                          .collect(Collectors.joining(INGREDIENTS_DELIMITER));
     }
 
     private String mapToIngredient(final IngredientDto ingredient) {
         return new StringJoiner(INGREDIENT_DELIMITER)
-                .add(ingredient.getName())
+                .add(replacePolishCharacters(ingredient.getName()))
                 .add(String.valueOf(ingredient.getAmount()))
                 .add(ingredient.getUnit().getName())
                 .toString();

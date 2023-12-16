@@ -47,15 +47,15 @@ class RecipeMapperImplTest {
                                                           .amount(300d))));
 
         assertThat(result).usingRecursiveComparison()
-                          .isEqualTo(new Recipe().name("Pierś w cebuli")
+                          .isEqualTo(new Recipe().name("Piers w cebuli")
                                                  .portions(2)
-                                                 .preparation("Pierś pokroic na duże kawałki, zamarynować w " +
-                                                         "przyprawach i odstawić na pare godzin. Podsmażyć pierś " +
-                                                         "na patalni, a następnie zeszklić cebulkę. Dodać śmietanę " +
-                                                         "i dusić przez 60 min na małym ogniu. Pod koniec dorzucić " +
-                                                         "pokrojone pomidorki koktajlowe. Podawać z pitą, bułką na " +
-                                                         "parze lub innym pieczywem.")
-                                                 .ingredients("pierś z kurczaka,1.0,szt;cebula,5.0,szt;śmietana 30%," +
+                                                 .preparation("Piers pokroic na duze kawalki, zamarynowac w " +
+                                                         "przyprawach i odstawic na pare godzin. Podsmazyc piers na " +
+                                                         "patalni, a nastepnie zeszklic cebulke. Dodac smietane " +
+                                                         "i dusic przez 60 min na malym ogniu. Pod koniec dorzucic" +
+                                                         " pokrojone pomidorki koktajlowe. Podawac z pita, bulka " +
+                                                         "na parze lub innym pieczywem.")
+                                                 .ingredients("piers z kurczaka,1.0,szt;cebula,5.0,szt;smietana 30%," +
                                                          "1.0,szt;pita,2.0,szt;pomidorki koktajlowe,300.0,gram"));
     }
 }
