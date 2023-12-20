@@ -4,8 +4,11 @@ import org.springframework.stereotype.Component;
 import pl.kenez.communication.recipe.IngredientDto;
 import pl.kenez.communication.recipe.RecipeDto;
 import pl.kenez.db.model.Recipe;
+import pl.kenez.enums.Unit;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
@@ -37,5 +40,32 @@ class RecipeMapperImpl implements RecipeMapper {
                 .add(String.valueOf(ingredient.getAmount()))
                 .add(ingredient.getUnit().getName())
                 .toString();
+    }
+
+    @Override
+    public Set<RecipeDto> mapToRecipeDtos(final Set<Recipe> recipes) {
+        return recipes.stream()
+                      .map(this::mapToRecipeDto)
+                      .collect(Collectors.toSet());
+    }
+
+    private RecipeDto mapToRecipeDto(final Recipe recipe) {
+        return new RecipeDto().name(recipe.getName())
+                              .portions(recipe.getPortions())
+                              .preparation(recipe.getPreparation())
+                              .ingredients(mapToIngredientsDtos(recipe.getIngredients()));
+    }
+
+    private List<IngredientDto> mapToIngredientsDtos(final String ingredients) {
+        return Arrays.asList(ingredients.split(INGREDIENTS_DELIMITER)).stream()
+                     .map(this::mapToIngredientDto)
+                     .collect(Collectors.toList());
+    }
+
+    private IngredientDto mapToIngredientDto(final String ingredient) {
+        final String[] splitIngredient = ingredient.split(INGREDIENT_DELIMITER);
+        return new IngredientDto().name(splitIngredient[0])
+                                  .amount(Double.valueOf(splitIngredient[1]))
+                                  .unit(Unit.fromName(splitIngredient[2]));
     }
 }

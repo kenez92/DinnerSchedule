@@ -2,6 +2,7 @@ package pl.kenez.communication.recipe;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class RecipeDto implements Serializable {
 

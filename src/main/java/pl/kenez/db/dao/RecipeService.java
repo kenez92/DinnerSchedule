@@ -1,9 +1,11 @@
-package pl.kenez.service;
+package pl.kenez.db.dao;
 
 import org.springframework.stereotype.Service;
 import pl.kenez.communication.recipe.RecipeDto;
 import pl.kenez.db.repository.RecipeRepository;
 import pl.kenez.mapper.RecipeMapper;
+
+import java.util.Set;
 
 @Service
 public class RecipeService {
@@ -17,5 +19,9 @@ public class RecipeService {
 
     public void addRecipe(final RecipeDto recipeDto) {
         repository.save(mapper.mapToRecipe(recipeDto));
+    }
+
+    public Set<RecipeDto> findRandomRecipes(final int quantity) {
+        return mapper.mapToRecipeDtos(repository.findRandomRecipes(quantity));
     }
 }
