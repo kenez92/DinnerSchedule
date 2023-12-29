@@ -16,7 +16,7 @@ public class PrepareBuyListService {
         recipes.stream()
                .flatMap(e -> e.getIngredients().stream())
                .toList()
-               .forEach(e -> addToList(buyList, e));
+               .forEach(e -> addToList(buyList, e.copy()));
         return buyList;
     }
 

@@ -74,4 +74,10 @@ public class IngredientDto implements Serializable {
         result = 31 * result + unit.hashCode();
         return result;
     }
+
+    public IngredientDto copy() {
+        return new IngredientDto().name(name)
+                                  .unit(unit)
+                                  .amount(amount);
+    }
 }

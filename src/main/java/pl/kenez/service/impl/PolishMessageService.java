@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 class PolishMessageService implements MessageService {
     private static final String ENTER = "\n";
     private static final String SPACE = " ";
+    private static final Set<Unit> SPICES = Set.of(Unit.ML, Unit.LYZECZKA, Unit.LYZKA, Unit.PRZYPRAWA, Unit.SZCZYPTA,
+            Unit.ZABEK);
 
     final PrepareBuyListService prepareBuyListService;
 
@@ -83,7 +85,6 @@ class PolishMessageService implements MessageService {
     }
 
     private boolean isSpice(final Unit unit) {
-        return Unit.SZCZYPTA.equals(unit)
-                || Unit.PRZYPRAWA.equals(unit);
+        return SPICES.contains(unit);
     }
 }
