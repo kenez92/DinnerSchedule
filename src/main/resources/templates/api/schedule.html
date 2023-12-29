@@ -10,7 +10,7 @@
 <form class="center-element" action="/api/schedule" method="post" th:object="${scheduleDto}">
     <p>E-mail</p>
     <input id="mailTo" required type="text" name="mailTo">
-    <p>Ilość porcji</p>
+    <p>Ilość obiadków do zaplanowania</p>
     <input id="dinnerQuantity" required type="number" name="dinnerQuantity">
     <br>
     <input type="submit" id="submitButton" th:value="Zaplanuj">
