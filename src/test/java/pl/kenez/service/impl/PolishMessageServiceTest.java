@@ -2,38 +2,29 @@ package pl.kenez.service.impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import pl.kenez.communication.recipe.IngredientDto;
 import pl.kenez.communication.recipe.RecipeDto;
 import pl.kenez.enums.Unit;
 import pl.kenez.service.MessageService;
 import pl.kenez.service.PrepareBuyListService;
-import pl.kenez.db.dao.RecipeService;
 
 import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
 class PolishMessageServiceTest {
-    @Mock
-    private RecipeService recipeService;
 
     private MessageService service;
 
     @BeforeEach
     void setUp() {
-        service = new PolishMessageService(recipeService, new PrepareBuyListService());
+        service = new PolishMessageService(new PrepareBuyListService());
     }
 
     @Test
     void shouldReturnCorrectMessage() {
-        when(recipeService.findRandomRecipes(anyInt())).thenReturn(Set.of(
+        final String result = service.prepareMessage(Set.of(
                 new RecipeDto().name("name1")
                                .portions(2)
                                .preparation("Preparation")
@@ -73,8 +64,6 @@ class PolishMessageServiceTest {
                                                           .unit(Unit.GRAM)
                                                           .amount(311d)))));
 
-        final String result = service.prepareMessage();
-
         assertThat(result).isEqualTo("name1\n" +
                 "Składniki: ingredient1 1.0 szt\n" +
                 "ingredient2 8.0 szt\n" +
@@ -103,5 +92,4 @@ class PolishMessageServiceTest {
                 "ingredient1 2.0 gram\n" +
                 "ingredient6 311.0 gram\n");
     }
-
 }

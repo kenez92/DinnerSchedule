@@ -19,6 +19,12 @@
             <column name="portions" type="smallint"/>
         </createTable>
     </changeSet>
+    <changeSet id="00000000000002" author="kenez">
+        <createSequence sequenceName="recipe_seq"
+                        cacheSize="50"
+                        incrementBy="50"
+                        startValue="1"/>
+    </changeSet>
     <changeSet id="00000000000003" author="kenez">
         <createIndex tableName="recipe" indexName="recipe_name">
             <column name="name"/>

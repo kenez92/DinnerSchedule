@@ -6,29 +6,24 @@ import pl.kenez.communication.recipe.IngredientDto;
 import pl.kenez.communication.recipe.RecipeDto;
 import pl.kenez.service.MessageService;
 import pl.kenez.service.PrepareBuyListService;
-import pl.kenez.db.dao.RecipeService;
 
 import java.util.List;
 import java.util.Set;
 
 @Service
 class PolishMessageService implements MessageService {
-    private static final int DAYS_IN_WEEK = 7;
     private static final String ENTER = "\n";
     private static final String SPACE = " ";
 
-    final RecipeService recipeService;
     final PrepareBuyListService prepareBuyListService;
 
     @Autowired
-    PolishMessageService(final RecipeService recipeService, final PrepareBuyListService prepareBuyListService) {
-        this.recipeService = recipeService;
+    PolishMessageService(final PrepareBuyListService prepareBuyListService) {
         this.prepareBuyListService = prepareBuyListService;
     }
 
     @Override
-    public String prepareMessage() {
-        final Set<RecipeDto> recipes = recipeService.findRandomRecipes(DAYS_IN_WEEK);
+    public String prepareMessage(final Set<RecipeDto> recipes) {
         return toContent(recipes, prepareBuyListService.prepareBuyList(recipes));
     }
 
