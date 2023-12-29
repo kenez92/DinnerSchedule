@@ -26,8 +26,7 @@
             <tbody id="ingredients">
             <tr>
                 <td><input type="text" name="ingredients[0].name"/></td>
-                <td><input type="number" name="ingredients[0].amount"/></td>
-                <!--                <td><input type="text" name="ingredients[0].unit"/></td>-->
+                <td><input type="number" name="ingredients[0].amount" step="any"/></td>
                 <td>
                     <select name="ingredients[0].unit">
                         <option th:each="unitOpt : ${T(pl.kenez.enums.Unit).values()}"
@@ -60,6 +59,7 @@
         let amountInput = document.createElement("input")
         amountInput.name = "ingredients[" + rowNumber + "].amount"
         amountInput.type = "number";
+        amountInput.step = "any"
         amountCol.appendChild(amountInput);
 
         let unitCol = newRow.insertCell(-1)
