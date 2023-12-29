@@ -37,7 +37,7 @@ class RecipeMapperImpl implements RecipeMapper {
 
     private String mapToIngredient(final IngredientDto ingredient) {
         return new StringJoiner(INGREDIENT_DELIMITER)
-                .add(replacePolishCharacters(ingredient.getName()))
+                .add(replacePolishCharacters(ingredient.getName()).toLowerCase())
                 .add(String.valueOf(ingredient.getAmount()))
                 .add(ingredient.getUnit().getName())
                 .toString();
@@ -79,7 +79,7 @@ class RecipeMapperImpl implements RecipeMapper {
 
     private Recipe toRecipe(final UpdateRecipeDto recipe) {
         return new Recipe().name(replacePolishCharacters(recipe.getName()))
-                           .ingredients(replacePolishCharacters(recipe.getIngredients()))
+                           .ingredients(replacePolishCharacters(recipe.getIngredients()).toLowerCase())
                            .portions(recipe.getPortions())
                            .preparation(replacePolishCharacters(recipe.getPreparations()));
     }

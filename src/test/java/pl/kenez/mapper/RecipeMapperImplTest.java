@@ -32,19 +32,19 @@ class RecipeMapperImplTest {
                                        "śmietanę i dusić przez 60 min na małym ogniu. Pod koniec dorzucić pokrojone " +
                                        "pomidorki koktajlowe. Podawać z pitą, bułką na parze lub innym pieczywem.")
                                .ingredients(List.of(
-                                       new IngredientDto().name("pierś z kurczaka")
+                                       new IngredientDto().name("Pierś z kurczaka")
                                                           .unit(Unit.PIECE)
                                                           .amount(1d),
-                                       new IngredientDto().name("cebula")
+                                       new IngredientDto().name("Cebula")
                                                           .unit(Unit.PIECE)
                                                           .amount(5d),
-                                       new IngredientDto().name("śmietana 30%")
+                                       new IngredientDto().name("śmiETANA 30%")
                                                           .unit(Unit.PIECE)
                                                           .amount(1d),
                                        new IngredientDto().name("pita")
                                                           .unit(Unit.PIECE)
                                                           .amount(2d),
-                                       new IngredientDto().name("pomidorki koktajlowe")
+                                       new IngredientDto().name("Pomidorki Koktajlowe")
                                                           .unit(Unit.GRAM)
                                                           .amount(300d))));
 
@@ -127,7 +127,7 @@ class RecipeMapperImplTest {
                 new UpdateRecipeDto().name("Tęśt")
                                      .portions(3)
                                      .preparations("Tęśtuję polskie źńaki")
-                                     .ingredients("składnik,1.0,kg;śmietana,1.0,szt")));
+                                     .ingredients("Składnik,1.0,kg;śmietana,1.0,szt")));
 
         assertThat(result).usingRecursiveFieldByFieldElementComparator()
                           .containsExactlyInAnyOrder(new Recipe().name("Test")
