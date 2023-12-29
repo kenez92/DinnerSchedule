@@ -11,6 +11,6 @@ import java.util.Set;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
     @Query(nativeQuery = true,
-            value = "SELECT * FROM recipe r ORDER BY RAND() LIMIT ?1")
+            value = "SELECT * FROM recipe r ORDER BY RANDOM() LIMIT ?1")
     Set<Recipe> findRandomRecipes(final int quantity);
 }

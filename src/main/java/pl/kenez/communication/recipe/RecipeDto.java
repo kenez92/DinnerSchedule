@@ -2,15 +2,12 @@ package pl.kenez.communication.recipe;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 public class RecipeDto implements Serializable {
 
     private String name;
     private Integer portions;
-
     private String preparation;
-
     private List<IngredientDto> ingredients;
 
     public RecipeDto() {

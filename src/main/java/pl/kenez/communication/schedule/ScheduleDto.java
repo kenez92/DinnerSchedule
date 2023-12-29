@@ -7,7 +7,6 @@ import java.io.Serializable;
 public class ScheduleDto implements Serializable {
     @NotEmpty
     private String mailTo;
-
     @NotNull
     private Integer dinnerQuantity;
 

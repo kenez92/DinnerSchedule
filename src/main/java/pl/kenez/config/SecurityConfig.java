@@ -15,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private static final String USER_ROLE = "USER";
+    private static final String ADMIN_ROLE = "ADMIN";
     @Value("${app.username}")
     private String username;
 
@@ -25,16 +27,21 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager userDetailsService() {
         return new InMemoryUserDetailsManager(User.withUsername(username)
                                                   .password(passwordencoder().encode(password))
-                                                  .roles("USER")
+                                                  .roles(USER_ROLE, ADMIN_ROLE)
                                                   .build());
     }
 
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(e -> e.anyRequest().
-                                             permitAll())
+                .authorizeHttpRequests(e -> e.anyRequest().permitAll())
+//                        e -> e.requestMatchers(HttpMethod.POST, "/admin/update/from/excel").hasRole(ADMIN_ROLE)
+//                              .requestMatchers(HttpMethod.POST, "/api/recipe").hasRole(USER_ROLE)
+//                              .requestMatchers(HttpMethod.GET, "/api/recipe").hasRole(USER_ROLE)
+//                              .requestMatchers(HttpMethod.POST, "/api/schedule").hasRole(USER_ROLE)
+//                              .requestMatchers(HttpMethod.GET, "/api/schedule").hasRole(USER_ROLE))
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .formLogin(customizer -> customizer.defaultSuccessUrl("/api/recipe"))
                 .build();
     }

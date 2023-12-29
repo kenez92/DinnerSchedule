@@ -8,8 +8,8 @@ import pl.kenez.enums.Unit;
 import pl.kenez.service.MessageService;
 import pl.kenez.service.PrepareBuyListService;
 
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,7 +24,7 @@ class PolishMessageServiceTest {
 
     @Test
     void shouldReturnCorrectMessage() {
-        final String result = service.prepareMessage(Set.of(
+        final String result = service.prepareMessage(new LinkedHashSet<>(List.of(
                 new RecipeDto().name("name1")
                                .portions(2)
                                .preparation("Preparation")
@@ -62,7 +62,7 @@ class PolishMessageServiceTest {
                                                           .amount(5d),
                                        new IngredientDto().name("ingredient6")
                                                           .unit(Unit.GRAM)
-                                                          .amount(311d)))));
+                                                          .amount(311d))))));
 
         assertThat(result).isEqualTo("name1\n" +
                 "Składniki: ingredient1 1.0 szt\n" +

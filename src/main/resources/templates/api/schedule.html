@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" th:href="@{/style/css/style.css}"/>
+    <title>Zaplanuj obiadki na kolejne dni</title>
+</head>
+<body class="bg">
+<form class="center-element" action="/api/schedule" method="post" th:object="${scheduleDto}">
+    <p>E-mail</p>
+    <input id="mailTo" required type="text" name="mailTo">
+    <p>Ilość porcji</p>
+    <input id="dinnerQuantity" required type="number" name="dinnerQuantity">
+    <br>
+    <input type="submit" id="submitButton" th:value="Zaplanuj">
+</form>
+</body>
+</html>

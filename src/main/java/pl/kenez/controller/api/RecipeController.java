@@ -1,4 +1,4 @@
-package pl.kenez.controller;
+package pl.kenez.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.kenez.communication.recipe.RecipeDto;
-import pl.kenez.db.dao.RecipeService;
+import pl.kenez.service.dao.RecipeService;
 
 @Controller
 @RequestMapping("/api/recipe")
@@ -22,12 +22,11 @@ public class RecipeController {
     @PostMapping
     public String save(@ModelAttribute("recipeDto") final RecipeDto recipeDto) {
         service.addRecipe(recipeDto);
-        return "recipe/addRecipe";
-
+        return "api/addRecipe";
     }
 
     @GetMapping
     public String index() {
-        return "recipe/addRecipe";
+        return "api/addRecipe";
     }
 }

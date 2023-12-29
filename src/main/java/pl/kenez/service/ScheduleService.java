@@ -2,7 +2,7 @@ package pl.kenez.service;
 
 import org.springframework.stereotype.Service;
 import pl.kenez.communication.schedule.ScheduleDto;
-import pl.kenez.db.dao.RecipeService;
+import pl.kenez.service.dao.RecipeService;
 import pl.kenez.model.MailModel;
 
 @Service
