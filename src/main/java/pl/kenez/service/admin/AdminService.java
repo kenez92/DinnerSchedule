@@ -1,6 +1,7 @@
 package pl.kenez.service.admin;
 
 import com.poiji.bind.Poiji;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.kenez.communication.admin.UpdateRecipeDto;
@@ -15,6 +16,7 @@ public class AdminService {
     @Value("${recipes.file.location}")
     private String fileLocation;
 
+    @Autowired
     public AdminService(final RecipeService recipeService) {
         this.recipeService = recipeService;
     }
@@ -24,7 +26,6 @@ public class AdminService {
     }
 
     private List<UpdateRecipeDto> getRecipesFromExcelFile() {
-//        return Poiji.fromExcel(new File("src\\main\\resources/recipes.xlsx"), UpdateRecipeDto.class);
         return Poiji.fromExcel(new File(fileLocation), UpdateRecipeDto.class);
     }
 }

@@ -2,6 +2,7 @@ package pl.kenez.mapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.kenez.communication.admin.UpdateRecipeDto;
 import pl.kenez.communication.recipe.IngredientDto;
 import pl.kenez.communication.recipe.RecipeDto;
 import pl.kenez.db.model.Recipe;
@@ -118,5 +119,20 @@ class RecipeMapperImplTest {
                                                                             .amount(1d)
                                                                             .unit(Unit.PIECE))));
 
+    }
+
+    @Test
+    void shouldMapUpdateRecipeDtosToRecipes() {
+        final List<Recipe> result = mapper.mapToRecipes(List.of(
+                new UpdateRecipeDto().name("Tęśt")
+                                     .portions(3)
+                                     .preparations("Tęśtuję polskie źńaki")
+                                     .ingredients("składnik,1.0,kg;śmietana,1.0,szt")));
+
+        assertThat(result).usingRecursiveFieldByFieldElementComparator()
+                          .containsExactlyInAnyOrder(new Recipe().name("Test")
+                                                                 .portions(3)
+                                                                 .preparation("Testuje polskie znaki")
+                                                                 .ingredients("skladnik,1.0,kg;smietana,1.0,szt"));
     }
 }

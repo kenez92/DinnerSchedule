@@ -45,4 +45,24 @@ public class UpdateRecipeDto implements Serializable {
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
+
+    public UpdateRecipeDto name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public UpdateRecipeDto portions(Integer portions) {
+        this.portions = portions;
+        return this;
+    }
+
+    public UpdateRecipeDto preparations(String preparations) {
+        this.preparations = preparations;
+        return this;
+    }
+
+    public UpdateRecipeDto ingredients(String ingredients) {
+        this.ingredients = ingredients;
+        return this;
+    }
 }

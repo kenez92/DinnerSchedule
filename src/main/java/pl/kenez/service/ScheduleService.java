@@ -1,9 +1,10 @@
 package pl.kenez.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kenez.communication.schedule.ScheduleDto;
-import pl.kenez.service.dao.RecipeService;
 import pl.kenez.model.MailModel;
+import pl.kenez.service.dao.RecipeService;
 
 @Service
 public class ScheduleService {
@@ -12,6 +13,7 @@ public class ScheduleService {
     private final MessageService messageService;
     private final RecipeService recipeService;
 
+    @Autowired
     public ScheduleService(final MailService mailService, final MessageService messageService,
                            final RecipeService recipeService) {
         this.mailService = mailService;
