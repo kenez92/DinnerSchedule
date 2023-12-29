@@ -27,13 +27,13 @@ class PrepareBuyListServiceTest {
                                .preparation("Preparation")
                                .ingredients(List.of(
                                        new IngredientDto().name("ingredient1")
-                                                          .unit(Unit.PIECE)
+                                                          .unit(Unit.SZTUKA)
                                                           .amount(1d),
                                        new IngredientDto().name("ingredient2")
-                                                          .unit(Unit.PIECE)
+                                                          .unit(Unit.SZTUKA)
                                                           .amount(5d),
                                        new IngredientDto().name("ingredient3")
-                                                          .unit(Unit.KG)
+                                                          .unit(Unit.GRAM)
                                                           .amount(2d),
                                        new IngredientDto().name("ingredient4")
                                                           .unit(Unit.GRAM)
@@ -49,10 +49,10 @@ class PrepareBuyListServiceTest {
                                                           .unit(Unit.GRAM)
                                                           .amount(2d),
                                        new IngredientDto().name("ingredient2")
-                                                          .unit(Unit.PIECE)
+                                                          .unit(Unit.SZTUKA)
                                                           .amount(3d),
                                        new IngredientDto().name("ingredient3")
-                                                          .unit(Unit.KG)
+                                                          .unit(Unit.GRAM)
                                                           .amount(1d),
                                        new IngredientDto().name("ingredient4")
                                                           .unit(Unit.GRAM)
@@ -64,16 +64,16 @@ class PrepareBuyListServiceTest {
         assertThat(result).usingRecursiveFieldByFieldElementComparator()
                           .containsExactlyInAnyOrder(
                                   new IngredientDto().name("ingredient1")
-                                                     .unit(Unit.PIECE)
+                                                     .unit(Unit.SZTUKA)
                                                      .amount(1d),
                                   new IngredientDto().name("ingredient1")
                                                      .unit(Unit.GRAM)
                                                      .amount(2d),
                                   new IngredientDto().name("ingredient2")
-                                                     .unit(Unit.PIECE)
+                                                     .unit(Unit.SZTUKA)
                                                      .amount(8d),
                                   new IngredientDto().name("ingredient3")
-                                                     .unit(Unit.KG)
+                                                     .unit(Unit.GRAM)
                                                      .amount(3d),
                                   new IngredientDto().name("ingredient4")
                                                      .unit(Unit.GRAM)

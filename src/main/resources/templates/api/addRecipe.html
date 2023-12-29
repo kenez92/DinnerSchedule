@@ -67,7 +67,7 @@
         unitSelect.name = "ingredients[" + rowNumber + "].unit"
         unitCol.appendChild(unitSelect)
 
-        var units = ["KG", "GRAM", "PIECE", "PACKAGE"];
+        var units = ["SZTUKA", "GRAM", "LYZECZKA", "ML", "LITR", "SZCZYPTA", "PACZKA", "PUSZKA", "SLOIK", "LYZKA", "ZABEK", "WORECZEK", "PRZYPRAWA"];
 
         for (var i = 0; i < units.length; i++) {
             var option = document.createElement("option");
@@ -75,7 +75,6 @@
             option.text = units[i];
             unitSelect.appendChild(option);
         }
-
 
         newRow.appendChild(nameCol);
         newRow.appendChild(amountCol);

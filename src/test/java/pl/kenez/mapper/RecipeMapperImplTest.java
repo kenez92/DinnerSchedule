@@ -33,16 +33,16 @@ class RecipeMapperImplTest {
                                        "pomidorki koktajlowe. Podawać z pitą, bułką na parze lub innym pieczywem.")
                                .ingredients(List.of(
                                        new IngredientDto().name("Pierś z kurczaka")
-                                                          .unit(Unit.PIECE)
+                                                          .unit(Unit.SZTUKA)
                                                           .amount(1d),
                                        new IngredientDto().name("Cebula")
-                                                          .unit(Unit.PIECE)
+                                                          .unit(Unit.SZTUKA)
                                                           .amount(5d),
                                        new IngredientDto().name("śmiETANA 30%")
-                                                          .unit(Unit.PIECE)
+                                                          .unit(Unit.SZTUKA)
                                                           .amount(1d),
                                        new IngredientDto().name("pita")
-                                                          .unit(Unit.PIECE)
+                                                          .unit(Unit.SZTUKA)
                                                           .amount(2d),
                                        new IngredientDto().name("Pomidorki Koktajlowe")
                                                           .unit(Unit.GRAM)
@@ -57,8 +57,8 @@ class RecipeMapperImplTest {
                                                          "i dusic przez 60 min na malym ogniu. Pod koniec dorzucic" +
                                                          " pokrojone pomidorki koktajlowe. Podawac z pita, bulka " +
                                                          "na parze lub innym pieczywem.")
-                                                 .ingredients("piers z kurczaka,1.0,szt;cebula,5.0,szt;smietana 30%," +
-                                                         "1.0,szt;pita,2.0,szt;pomidorki koktajlowe,300.0,gram"));
+                                                 .ingredients("piers z kurczaka,1.0,sztuka;cebula,5.0,sztuka;smietana 30%," +
+                                                         "1.0,sztuka;pita,2.0,sztuka;pomidorki koktajlowe,300.0,gram"));
     }
 
     @Test
@@ -72,12 +72,12 @@ class RecipeMapperImplTest {
                                     "i dusic przez 60 min na malym ogniu. Pod koniec dorzucic" +
                                     " pokrojone pomidorki koktajlowe. Podawac z pita, bulka " +
                                     "na parze lub innym pieczywem.")
-                            .ingredients("piers z kurczaka,1.0,szt;cebula,5.0,szt;smietana 30%," +
-                                    "1.0,szt;pita,2.0,szt;pomidorki koktajlowe,300.0,gram"),
+                            .ingredients("piers z kurczaka,1.0,sztuka;cebula,5.0,sztuka;smietana 30%," +
+                                    "1.0,sztuka;pita,2.0,sztuka;pomidorki koktajlowe,300.0,gram"),
                 new Recipe().name("Jajka z ziemniakami")
                             .portions(2)
                             .preparation("Ziemniaki ugotowac. Jajka usmazyc. Podawac z surowka.")
-                            .ingredients("ziemniaki,1.0,kg;jajka,3.0,szt;surowka,1.0,szt")));
+                            .ingredients("ziemniaki,1.0,gram;jajka,3.0,sztuka;surowka,1.0,sztuka")));
 
         assertThat(result).usingRecursiveFieldByFieldElementComparator()
                           .containsExactlyInAnyOrder(
@@ -91,16 +91,16 @@ class RecipeMapperImplTest {
                                                          "na parze lub innym pieczywem.")
                                                  .ingredients(List.of(
                                                          new IngredientDto().name("piers z kurczaka")
-                                                                            .unit(Unit.PIECE)
+                                                                            .unit(Unit.SZTUKA)
                                                                             .amount(1d),
                                                          new IngredientDto().name("cebula")
-                                                                            .unit(Unit.PIECE)
+                                                                            .unit(Unit.SZTUKA)
                                                                             .amount(5d),
                                                          new IngredientDto().name("smietana 30%")
-                                                                            .unit(Unit.PIECE)
+                                                                            .unit(Unit.SZTUKA)
                                                                             .amount(1d),
                                                          new IngredientDto().name("pita")
-                                                                            .unit(Unit.PIECE)
+                                                                            .unit(Unit.SZTUKA)
                                                                             .amount(2d),
                                                          new IngredientDto().name("pomidorki koktajlowe")
                                                                             .unit(Unit.GRAM)
@@ -111,13 +111,13 @@ class RecipeMapperImplTest {
                                                  .ingredients(List.of(
                                                          new IngredientDto().name("ziemniaki")
                                                                             .amount(1d)
-                                                                            .unit(Unit.KG),
+                                                                            .unit(Unit.GRAM),
                                                          new IngredientDto().name("jajka")
                                                                             .amount(3d)
-                                                                            .unit(Unit.PIECE),
+                                                                            .unit(Unit.SZTUKA),
                                                          new IngredientDto().name("surowka")
                                                                             .amount(1d)
-                                                                            .unit(Unit.PIECE))));
+                                                                            .unit(Unit.SZTUKA))));
 
     }
 
@@ -127,12 +127,12 @@ class RecipeMapperImplTest {
                 new UpdateRecipeDto().name("Tęśt")
                                      .portions(3)
                                      .preparations("Tęśtuję polskie źńaki")
-                                     .ingredients("Składnik,1.0,kg;śmietana,1.0,szt")));
+                                     .ingredients("Składnik,1.0,gram;śmietana,1.0,sztuka")));
 
         assertThat(result).usingRecursiveFieldByFieldElementComparator()
                           .containsExactlyInAnyOrder(new Recipe().name("Test")
                                                                  .portions(3)
                                                                  .preparation("Testuje polskie znaki")
-                                                                 .ingredients("skladnik,1.0,kg;smietana,1.0,szt"));
+                                                                 .ingredients("skladnik,1.0,gram;smietana,1.0,sztuka"));
     }
 }

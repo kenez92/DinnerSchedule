@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kenez.communication.recipe.IngredientDto;
 import pl.kenez.communication.recipe.RecipeDto;
+import pl.kenez.enums.Unit;
 import pl.kenez.service.MessageService;
 import pl.kenez.service.PrepareBuyListService;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 class PolishMessageService implements MessageService {
@@ -41,12 +44,23 @@ class PolishMessageService implements MessageService {
         sb.append(ENTER)
           .append("Lista zakupów: ")
           .append(ENTER);
-        buyList.forEach(e -> sb.append(e.getName())
+        buyList.stream()
+               .filter(e -> !isSpice(e.getUnit()))
+               .toList()
+               .forEach(e -> sb.append(e.getName())
                                .append(SPACE)
                                .append(e.getAmount())
                                .append(SPACE)
-                               .append(e.getUnit().getName())
+                               .append(e.getUnit().name().toLowerCase())
                                .append(ENTER));
+        sb.append(ENTER)
+          .append("Rozważ przyprawy: ");
+        buyList.stream()
+               .filter(e -> isSpice(e.getUnit()))
+               .map(IngredientDto::getName)
+               .collect(Collectors.toCollection(LinkedHashSet::new))
+               .forEach(e -> sb.append(ENTER)
+                               .append(e));
         return sb.toString();
     }
 
@@ -59,12 +73,17 @@ class PolishMessageService implements MessageService {
                                                .append(SPACE)
                                                .append(e.getAmount())
                                                .append(SPACE)
-                                               .append(e.getUnit().getName())
+                                               .append(e.getUnit().name().toLowerCase())
                                                .append(ENTER));
         sb.append("Porcje: ")
           .append(recipe.getPortions())
           .append(ENTER)
           .append(recipe.getPreparation());
         return sb.toString();
+    }
+
+    private boolean isSpice(final Unit unit) {
+        return Unit.SZCZYPTA.equals(unit)
+                || Unit.PRZYPRAWA.equals(unit);
     }
 }

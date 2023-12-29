@@ -1,5 +1,6 @@
 package pl.kenez.mapper;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.springframework.stereotype.Component;
 import pl.kenez.communication.admin.UpdateRecipeDto;
 import pl.kenez.communication.recipe.IngredientDto;
@@ -39,7 +40,7 @@ class RecipeMapperImpl implements RecipeMapper {
         return new StringJoiner(INGREDIENT_DELIMITER)
                 .add(replacePolishCharacters(ingredient.getName()).toLowerCase())
                 .add(String.valueOf(ingredient.getAmount()))
-                .add(ingredient.getUnit().getName())
+                .add(ingredient.getUnit().name().toLowerCase())
                 .toString();
     }
 
@@ -67,7 +68,7 @@ class RecipeMapperImpl implements RecipeMapper {
         final String[] splitIngredient = ingredient.split(INGREDIENT_DELIMITER);
         return new IngredientDto().name(splitIngredient[0])
                                   .amount(Double.valueOf(splitIngredient[1]))
-                                  .unit(Unit.fromName(splitIngredient[2]));
+                                  .unit(EnumUtils.getEnumIgnoreCase(Unit.class, splitIngredient[2]));
     }
 
     @Override
