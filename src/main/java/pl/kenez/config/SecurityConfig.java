@@ -24,12 +24,20 @@ public class SecurityConfig {
     @Value("${app.password}")
     private String password;
 
+    @Value("${app.simple.user}")
+    private String simpleUser;
+
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        return new InMemoryUserDetailsManager(User.withUsername(username)
-                                                  .password(passwordencoder().encode(password))
-                                                  .roles(USER_ROLE, ADMIN_ROLE)
-                                                  .build());
+        return new InMemoryUserDetailsManager(
+                User.withUsername(username)
+                    .password(passwordencoder().encode(password))
+                    .roles(USER_ROLE, ADMIN_ROLE)
+                    .build(),
+                User.withUsername(simpleUser)
+                    .password(passwordencoder().encode(simpleUser))
+                    .roles(USER_ROLE)
+                    .build());
     }
 
     @Bean
