@@ -3,6 +3,7 @@ package pl.kenez.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -34,12 +35,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(e -> e.anyRequest().permitAll())
-//                        e -> e.requestMatchers(HttpMethod.POST, "/admin/update/from/excel").hasRole(ADMIN_ROLE)
-//                              .requestMatchers(HttpMethod.POST, "/api/recipe").hasRole(USER_ROLE)
-//                              .requestMatchers(HttpMethod.GET, "/api/recipe").hasRole(USER_ROLE)
-//                              .requestMatchers(HttpMethod.POST, "/api/schedule").hasRole(USER_ROLE)
-//                              .requestMatchers(HttpMethod.GET, "/api/schedule").hasRole(USER_ROLE))
+                .authorizeHttpRequests(
+                        e -> e.requestMatchers(HttpMethod.POST, "/admin/update/from/excel").hasRole(ADMIN_ROLE)
+                              .requestMatchers(HttpMethod.GET, "/admin").hasRole(ADMIN_ROLE)
+                              .requestMatchers(HttpMethod.POST, "/api/recipe").hasRole(USER_ROLE)
+                              .requestMatchers(HttpMethod.GET, "/api/recipe").hasRole(USER_ROLE)
+                              .requestMatchers(HttpMethod.POST, "/api/schedule").hasRole(USER_ROLE)
+                              .requestMatchers(HttpMethod.GET, "/api/schedule").hasRole(USER_ROLE))
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .formLogin(customizer -> customizer.defaultSuccessUrl("/api/recipe"))
