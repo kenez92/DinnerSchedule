@@ -27,7 +27,13 @@
             <tr>
                 <td><input type="text" name="ingredients[0].name"/></td>
                 <td><input type="number" name="ingredients[0].amount"/></td>
-                <td><input type="text" name="ingredients[0].unit"/></td>
+                <!--                <td><input type="text" name="ingredients[0].unit"/></td>-->
+                <td>
+                    <select name="ingredients[0].unit">
+                        <option th:each="unitOpt : ${T(pl.kenez.enums.Unit).values()}"
+                                th:value="${unitOpt}" th:text="${unitOpt}"></option>
+                    </select>
+                </td>
             </tbody>
         </table>
     </fieldset>
@@ -48,7 +54,6 @@
         let nameInput = document.createElement("input")
         nameInput.name = "ingredients[" + rowNumber + "].name"
         nameInput.type = "text";
-        nameInput.value = "name"
         nameCol.appendChild(nameInput);
 
         let amountCol = newRow.insertCell(-1);
@@ -58,10 +63,19 @@
         amountCol.appendChild(amountInput);
 
         let unitCol = newRow.insertCell(-1)
-        let unitInput = document.createElement("input")
-        unitInput.name = "ingredients[" + rowNumber + "].unit"
-        unitInput.type = "text";
-        unitCol.appendChild(unitInput)
+        let unitSelect = document.createElement("select")
+        unitSelect.name = "ingredients[" + rowNumber + "].unit"
+        unitCol.appendChild(unitSelect)
+
+        var units = ["KG", "GRAM", "PIECE", "PACKAGE"];
+
+        for (var i = 0; i < units.length; i++) {
+            var option = document.createElement("option");
+            option.value = units[i];
+            option.text = units[i];
+            unitSelect.appendChild(option);
+        }
+
 
         newRow.appendChild(nameCol);
         newRow.appendChild(amountCol);
