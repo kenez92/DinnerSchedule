@@ -5,7 +5,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.kenez.communication.admin.UpdateRecipeDto;
+import pl.kenez.db.model.Recipe;
 import pl.kenez.service.dao.RecipeService;
 
 import java.io.FileReader;
@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminService {
@@ -30,7 +32,7 @@ public class AdminService {
         recipeService.updateDatabase(getRecipesFromExcelFile());
     }
 
-    private List<UpdateRecipeDto> getRecipesFromExcelFile() {
+    private Set<Recipe> getRecipesFromExcelFile() {
         final List<List<String>> records = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(fileLocation));) {
             String[] values = null;
@@ -42,10 +44,10 @@ public class AdminService {
         }
         records.removeFirst(); // Remove column names
         return records.stream()
-                      .map(e -> new UpdateRecipeDto().name(e.get(1))
-                                                     .ingredients(e.get(2))
-                                                     .preparations(e.get(3))
-                                                     .portions(Integer.valueOf(e.get(4))))
-                      .toList();
+                      .map(e -> new Recipe().name(e.get(1))
+                                            .ingredients(e.get(2))
+                                            .preparation(e.get(3))
+                                            .portions(Integer.valueOf(e.get(4))))
+                      .collect(Collectors.toSet());
     }
 }

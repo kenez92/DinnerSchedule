@@ -2,7 +2,6 @@ package pl.kenez.mapper.impl;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.springframework.stereotype.Component;
-import pl.kenez.communication.admin.UpdateRecipeDto;
 import pl.kenez.communication.recipe.IngredientDto;
 import pl.kenez.communication.recipe.RecipeDto;
 import pl.kenez.db.model.Recipe;
@@ -70,19 +69,5 @@ class RecipeMapperImpl implements RecipeMapper {
         return new IngredientDto().name(splitIngredient[0])
                                   .amount(Double.valueOf(splitIngredient[1]))
                                   .unit(EnumUtils.getEnumIgnoreCase(Unit.class, splitIngredient[2]));
-    }
-
-    @Override
-    public List<Recipe> mapToRecipes(final List<UpdateRecipeDto> recipes) {
-        return recipes.stream()
-                      .map(this::toRecipe)
-                      .collect(Collectors.toList());
-    }
-
-    private Recipe toRecipe(final UpdateRecipeDto recipe) {
-        return new Recipe().name(replacePolishCharacters(recipe.getName()))
-                           .ingredients(replacePolishCharacters(recipe.getIngredients()).toLowerCase())
-                           .portions(recipe.getPortions())
-                           .preparation(replacePolishCharacters(recipe.getPreparations()));
     }
 }

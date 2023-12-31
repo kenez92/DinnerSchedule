@@ -1,12 +1,11 @@
 package pl.kenez.service.dao;
 
 import org.springframework.stereotype.Service;
-import pl.kenez.communication.admin.UpdateRecipeDto;
 import pl.kenez.communication.recipe.RecipeDto;
+import pl.kenez.db.model.Recipe;
 import pl.kenez.db.repository.RecipeRepository;
 import pl.kenez.mapper.RecipeMapper;
 
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -27,8 +26,8 @@ public class RecipeService {
         return mapper.mapToRecipeDtos(repository.findRandomRecipes(quantity));
     }
 
-    public void updateDatabase(final List<UpdateRecipeDto> recipes) {
+    public void updateDatabase(final Set<Recipe> recipes) {
         repository.deleteAll();
-        repository.saveAll(mapper.mapToRecipes(recipes));
+        repository.saveAll(recipes);
     }
 }
