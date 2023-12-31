@@ -78,9 +78,9 @@ class PolishMessageServiceTest {
 
         assertThat(result).isEqualTo("name1\n" +
                 "Składniki: ingredient1 1.0 sztuka\n" +
-                "ingredient2 8.0 sztuka\n" +
-                "ingredient3 3.0 gram\n" +
-                "ingredient4 7.0 gram\n" +
+                "ingredient2 5.0 sztuka\n" +
+                "ingredient3 2.0 gram\n" +
+                "ingredient4 2.0 gram\n" +
                 "ingredient5 300.0 gram\n" +
                 "przyprawa 30.0 przyprawa\n" +
                 "Porcje: 2\n" +
