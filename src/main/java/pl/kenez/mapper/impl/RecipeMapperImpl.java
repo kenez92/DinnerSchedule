@@ -1,4 +1,4 @@
-package pl.kenez.mapper;
+package pl.kenez.mapper.impl;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.springframework.stereotype.Component;
@@ -7,6 +7,7 @@ import pl.kenez.communication.recipe.IngredientDto;
 import pl.kenez.communication.recipe.RecipeDto;
 import pl.kenez.db.model.Recipe;
 import pl.kenez.enums.Unit;
+import pl.kenez.mapper.RecipeMapper;
 
 import java.util.Arrays;
 import java.util.List;

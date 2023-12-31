@@ -1,4 +1,4 @@
-package pl.kenez.mapper;
+package pl.kenez.mapper.impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,6 +7,8 @@ import pl.kenez.communication.recipe.IngredientDto;
 import pl.kenez.communication.recipe.RecipeDto;
 import pl.kenez.db.model.Recipe;
 import pl.kenez.enums.Unit;
+import pl.kenez.mapper.RecipeMapper;
+import pl.kenez.mapper.impl.RecipeMapperImpl;
 
 import java.util.List;
 import java.util.Set;
