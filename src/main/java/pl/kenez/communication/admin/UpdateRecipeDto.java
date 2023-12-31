@@ -1,17 +1,11 @@
 package pl.kenez.communication.admin;
 
-import com.poiji.annotation.ExcelCellName;
-
 import java.io.Serializable;
 
 public class UpdateRecipeDto implements Serializable {
-    @ExcelCellName("Name")
     private String name;
-    @ExcelCellName("Portions")
     private Integer portions;
-    @ExcelCellName("Preparation")
     private String preparations;
-    @ExcelCellName("Ingredients")
     private String ingredients;
 
     public String getName() {

@@ -1,18 +1,23 @@
 package pl.kenez.service.admin;
 
-import com.poiji.bind.Poiji;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.kenez.communication.admin.UpdateRecipeDto;
 import pl.kenez.service.dao.RecipeService;
 
-import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class AdminService {
     private final RecipeService recipeService;
+
     @Value("${recipes.file.location}")
     private String fileLocation;
 
@@ -21,11 +26,26 @@ public class AdminService {
         this.recipeService = recipeService;
     }
 
-    public void updateFromExcel() {
+    public void updateFromCsvFile() {
         recipeService.updateDatabase(getRecipesFromExcelFile());
     }
 
     private List<UpdateRecipeDto> getRecipesFromExcelFile() {
-        return Poiji.fromExcel(new File(fileLocation), UpdateRecipeDto.class);
+        final List<List<String>> records = new ArrayList<>();
+        try (CSVReader csvReader = new CSVReader(new FileReader(fileLocation));) {
+            String[] values = null;
+            while ((values = csvReader.readNext()) != null) {
+                records.add(Arrays.asList(values));
+            }
+        } catch (IOException | CsvValidationException e) {
+            throw new RuntimeException(e);
+        }
+        records.removeFirst(); // Remove column names
+        return records.stream()
+                      .map(e -> new UpdateRecipeDto().name(e.get(1))
+                                                     .ingredients(e.get(2))
+                                                     .preparations(e.get(3))
+                                                     .portions(Integer.valueOf(e.get(4))))
+                      .toList();
     }
 }

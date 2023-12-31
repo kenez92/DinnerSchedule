@@ -29,14 +29,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.liquibase:liquibase-gradle-plugin:1.1.0'
     implementation 'javax.validation:validation-api:2.0.1.Final'
-    implementation 'com.github.ozlerhakan:poiji:4.1.2'
-
 
     runtimeOnly 'org.postgresql:postgresql'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
 }
 
 tasks.named('test') {

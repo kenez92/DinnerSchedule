@@ -17,9 +17,9 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @PostMapping("/update/from/excel")
+    @PostMapping("/update/from/csv")
     public String updateFromExcel() {
-        adminService.updateFromExcel();
+        adminService.updateFromCsvFile();
         return "admin/admin";
     }
 

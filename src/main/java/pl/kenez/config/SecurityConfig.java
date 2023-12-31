@@ -44,7 +44,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(
-                        e -> e.requestMatchers(HttpMethod.POST, "/admin/update/from/excel").hasRole(ADMIN_ROLE)
+                        e -> e.requestMatchers(HttpMethod.POST, "/admin/update/from/csv").hasRole(ADMIN_ROLE)
                               .requestMatchers(HttpMethod.GET, "/admin").hasRole(ADMIN_ROLE)
                               .requestMatchers(HttpMethod.POST, "/api/recipe").hasRole(USER_ROLE)
                               .requestMatchers(HttpMethod.GET, "/api/recipe").hasRole(USER_ROLE)
